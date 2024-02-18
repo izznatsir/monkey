@@ -11,10 +11,19 @@ func TestNextToken(t *testing.T) {
 let ten = 10;
 
 let add = fn(x, y) {
-	x + y;
+	return x + y;
 }
 
 let result = add(five, ten);
+
+if (result - x == y) {
+	result > y;
+	result / y;
+	!true == false;
+} else {
+	x + y != result;
+	x * y;
+}
 `
 
 	tests := []struct {
@@ -41,6 +50,7 @@ let result = add(five, ten);
 		{token.IDENT, "y"},
 		{token.RPAREN, ")"},
 		{token.LBRACE, "{"},
+		{token.RETURN, "return"},
 		{token.IDENT, "x"},
 		{token.PLUS, "+"},
 		{token.IDENT, "y"},
@@ -56,6 +66,42 @@ let result = add(five, ten);
 		{token.IDENT, "ten"},
 		{token.RPAREN, ")"},
 		{token.SEMICOLON, ";"},
+		{token.IF, "if"},
+		{token.LPAREN, "("},
+		{token.IDENT, "result"},
+		{token.MINUS, "-"},
+		{token.IDENT, "x"},
+		{token.EQ, "=="},
+		{token.IDENT, "y"},
+		{token.RPAREN, ")"},
+		{token.LBRACE, "{"},
+		{token.IDENT, "result"},
+		{token.GT, ">"},
+		{token.IDENT, "y"},
+		{token.SEMICOLON, ";"},
+		{token.IDENT, "result"},
+		{token.SLASH, "/"},
+		{token.IDENT, "y"},
+		{token.SEMICOLON, ";"},
+		{token.BANG, "!"},
+		{token.TRUE, "true"},
+		{token.EQ, "=="},
+		{token.FALSE, "false"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
+		{token.ELSE, "else"},
+		{token.LBRACE, "{"},
+		{token.IDENT, "x"},
+		{token.PLUS, "+"},
+		{token.IDENT, "y"},
+		{token.NEQ, "!="},
+		{token.IDENT, "result"},
+		{token.SEMICOLON, ";"},
+		{token.IDENT, "x"},
+		{token.ASTERISK, "*"},
+		{token.IDENT, "y"},
+		{token.SEMICOLON, ";"},
+		{token.RBRACE, "}"},
 	}
 
 	l := New(input)

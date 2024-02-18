@@ -7,19 +7,6 @@ type Token struct {
 	Literal string
 }
 
-/*
-Monkey Language snippet:
-
-let five = 5;
-let ten = 10;
-
-let add = fn(x, y) {
-	x + y;
-};
-
-let result = add(five, ten);
-*/
-
 const (
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
@@ -29,8 +16,17 @@ const (
 	INT   = "INT"   // 1234567890
 
 	// Operators
-	ASSIGN = "="
-	PLUS   = "+"
+	ASSIGN   = "="
+	PLUS     = "+"
+	MINUS    = "-"
+	ASTERISK = "*"
+	SLASH    = "/"
+
+	BANG = "!"
+	LT   = "<"
+	GT   = ">"
+	EQ   = "=="
+	NEQ  = "!="
 
 	// Delimiters
 	COMMA     = ","
@@ -43,12 +39,22 @@ const (
 
 	// Keywords
 	FUNCTION = "FUNCTION"
+	RETURN   = "RETURN"
 	LET      = "LET"
+	IF       = "IF"
+	ELSE     = "ELSE"
+	TRUE     = "TRUE"
+	FALSE    = "FALSE"
 )
 
 var keywords = map[string]TokenType{
-	"fn":  FUNCTION,
-	"let": LET,
+	"fn":     FUNCTION,
+	"return": RETURN,
+	"let":    LET,
+	"if":     IF,
+	"else":   ELSE,
+	"true":   TRUE,
+	"false":  FALSE,
 }
 
 func LookupIdent(ident string) TokenType {
